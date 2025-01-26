@@ -18,25 +18,15 @@ class AllTransactionsViewModel: ObservableObject {
         let amount: String
         let date: Date
         
-        static func from(apiTransaction: APITransaction) -> Transaction {
+        static func from(apiTransaction: AllTransactionsAPITransaction) -> Transaction {
             let sign = apiTransaction.value >= 0 ? "+" : ""
             let formattedAmount = String(format: "%@€%.2f", sign, apiTransaction.value)
             return Transaction(
                 description: apiTransaction.label,
                 amount: formattedAmount,
-                date: Date() // Dans une vraie app, on récupérerait la date de l'API
+                date: Date()
             )
         }
-    }
-    
-    struct APITransaction: Codable {
-        let value: Double
-        let label: String
-    }
-    
-    struct APIResponse: Codable {
-        let currentBalance: Double
-        let transactions: [APITransaction]
     }
     
     init() {
@@ -72,7 +62,7 @@ class AllTransactionsViewModel: ObservableObject {
                 }
                 
                 do {
-                    let response = try JSONDecoder().decode(APIResponse.self, from: data)
+                    let response = try JSONDecoder().decode(AllTransactionsAPIResponse.self, from: data)
                     self?.transactions = response.transactions.map { Transaction.from(apiTransaction: $0) }
                 } catch {
                     self?.error = "Invalid response"

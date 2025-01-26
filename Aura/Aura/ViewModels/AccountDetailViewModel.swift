@@ -18,21 +18,11 @@ class AccountDetailViewModel: ObservableObject {
         let description: String
         let amount: String
         
-        static func from(apiTransaction: APITransaction) -> Transaction {
+        static func from(apiTransaction: AccountDetailAPITransaction) -> Transaction {
             let sign = apiTransaction.value >= 0 ? "+" : ""
             let formattedAmount = String(format: "%@€%.2f", sign, apiTransaction.value)
             return Transaction(description: apiTransaction.label, amount: formattedAmount)
         }
-    }
-    
-    struct APIResponse: Codable {
-        let currentBalance: Double
-        let transactions: [APITransaction]
-    }
-    
-    struct APITransaction: Codable {
-        let value: Double
-        let label: String
     }
     
     init() {
@@ -68,7 +58,7 @@ class AccountDetailViewModel: ObservableObject {
                 }
                 
                 do {
-                    let response = try JSONDecoder().decode(APIResponse.self, from: data)
+                    let response = try JSONDecoder().decode(AccountDetailAPIResponse.self, from: data)
                     
                     self?.totalAmount = String(format: "€%.2f", response.currentBalance)
                     
