@@ -1,15 +1,14 @@
 //
-//  AccountDetailViewModel.swift
+//  AllTransactionsViewModel.swift
 //  Aura
 //
-//  Created by Vincent Saluzzo on 29/09/2023.
+//  Created by pascal jesenberger on 22/01/2025.
 //
 
 import Foundation
 
-class AccountDetailViewModel: ObservableObject {
-    @Published var totalAmount: String = "€0.00"
-    @Published var recentTransactions: [Transaction] = []
+class AllTransactionsViewModel: ObservableObject {
+    @Published var transactions: [Transaction] = []
     @Published var isLoading: Bool = false
     @Published var error: String? = nil
     
@@ -17,17 +16,17 @@ class AccountDetailViewModel: ObservableObject {
         let id = UUID()
         let description: String
         let amount: String
+        let date: Date
         
         static func from(apiTransaction: APITransaction) -> Transaction {
             let sign = apiTransaction.value >= 0 ? "+" : ""
             let formattedAmount = String(format: "%@€%.2f", sign, apiTransaction.value)
-            return Transaction(description: apiTransaction.label, amount: formattedAmount)
+            return Transaction(
+                description: apiTransaction.label,
+                amount: formattedAmount,
+                date: Date() // Dans une vraie app, on récupérerait la date de l'API
+            )
         }
-    }
-    
-    struct APIResponse: Codable {
-        let currentBalance: Double
-        let transactions: [APITransaction]
     }
     
     struct APITransaction: Codable {
@@ -35,11 +34,16 @@ class AccountDetailViewModel: ObservableObject {
         let label: String
     }
     
-    init() {
-        fetchAccountDetails()
+    struct APIResponse: Codable {
+        let currentBalance: Double
+        let transactions: [APITransaction]
     }
     
-    func fetchAccountDetails() {
+    init() {
+        fetchTransactions()
+    }
+    
+    func fetchTransactions() {
         isLoading = true
         error = nil
         
@@ -69,12 +73,7 @@ class AccountDetailViewModel: ObservableObject {
                 
                 do {
                     let response = try JSONDecoder().decode(APIResponse.self, from: data)
-                    
-                    self?.totalAmount = String(format: "€%.2f", response.currentBalance)
-                    
-                    let limitedTransactions = response.transactions.prefix(3)
-                    self?.recentTransactions = limitedTransactions.map { Transaction.from(apiTransaction: $0) }
-                    
+                    self?.transactions = response.transactions.map { Transaction.from(apiTransaction: $0) }
                 } catch {
                     self?.error = "Invalid response"
                 }

@@ -8,69 +8,85 @@
 import SwiftUI
 
 struct AuthenticationView: View {
-    
     @State private var username: String = ""
     @State private var password: String = ""
     
     let gradientStart = Color(hex: "#94A684").opacity(0.7)
-    let gradientEnd = Color(hex: "#94A684").opacity(0.0) // Fades to transparent
+    let gradientEnd = Color(hex: "#94A684").opacity(0.0)
 
     @ObservedObject var viewModel: AuthenticationViewModel
-
     
     var body: some View {
-        
         ZStack {
-                    // Background gradient
-                    LinearGradient(gradient: Gradient(colors: [gradientStart, gradientEnd]), startPoint: .top, endPoint: .bottomLeading)
-                        .edgesIgnoringSafeArea(.all)
+            LinearGradient(gradient: Gradient(colors: [gradientStart, gradientEnd]), startPoint: .top, endPoint: .bottomLeading)
+                .edgesIgnoringSafeArea(.all)
 
-                    VStack(spacing: 20) {
-                        Image(systemName: "person.circle")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 50, height: 50)
-                            
-                        Text("Welcome !")
-                            .font(.largeTitle)
-                            .fontWeight(.semibold)
-                        
-                        TextField("Adresse email", text: $viewModel.username)
-                            .padding()
-                            .background(Color(UIColor.secondarySystemBackground))
-                            .cornerRadius(8)
-                            .autocapitalization(.none)
-                            .keyboardType(.emailAddress)
-                            .disableAutocorrection(true)
-                        
-                        SecureField("Mot de passe", text: $viewModel.password)
-                            .padding()
-                            .background(Color(UIColor.secondarySystemBackground))
-                            .cornerRadius(8)
-                        
-                        Button(action: {
-                            // Handle authentication logic here
-                            viewModel.login()
-                        }) {
-                            Text("Se connecter")
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color.black) // You can also change this to your pastel green color
-                                .cornerRadius(8)
+            VStack(spacing: 20) {
+                Image(systemName: "person.circle")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 50, height: 50)
+                    
+                Text("Welcome !")
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
+                
+                VStack(alignment: .leading) {
+                    TextField("Adresse email", text: $viewModel.username)
+                        .padding()
+                        .background(Color(UIColor.secondarySystemBackground))
+                        .cornerRadius(8)
+                        .autocapitalization(.none)
+                        .keyboardType(.emailAddress)
+                        .disableAutocorrection(true)
+                        .onChange(of: viewModel.username) { _ in
+                            viewModel.validateEmail()
                         }
+                    
+                    if !viewModel.isEmailValid {
+                        Text("Email invalide")
+                            .foregroundColor(.red)
+                            .font(.caption)
                     }
-                    .padding(.horizontal, 40)
                 }
+                
+                SecureField("Mot de passe", text: $viewModel.password)
+                    .padding()
+                    .background(Color(UIColor.secondarySystemBackground))
+                    .cornerRadius(8)
+                
+                if let error = viewModel.error {
+                    Text(error)
+                        .foregroundColor(.red)
+                        .font(.caption)
+                }
+                
+                Button(action: {
+                    viewModel.login()
+                }) {
+                    if viewModel.isLoading {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                    } else {
+                        Text("Se connecter")
+                    }
+                }
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.black)
+                .cornerRadius(8)
+                .disabled(viewModel.isLoading)
+            }
+            .padding(.horizontal, 40)
+        }
         .onTapGesture {
-                    self.endEditing(true)  // This will dismiss the keyboard when tapping outside
-                }
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        }
     }
-    
 }
 
 #Preview {
     AuthenticationView(viewModel: AuthenticationViewModel({
-        
     }))
 }
