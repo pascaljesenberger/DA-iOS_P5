@@ -33,42 +33,16 @@ class AccountDetailViewModel: ObservableObject {
         isLoading = true
         error = nil
         
-        guard let token = UserDefaults.standard.string(forKey: "authToken"),
-              let url = URL(string: "http://127.0.0.1:8080/account") else {
-            error = "Authentication error"
-            isLoading = false
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        request.setValue(token, forHTTPHeaderField: "token")
-        
-        URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
-            DispatchQueue.main.async {
-                self?.isLoading = false
-                
-                if let error = error {
-                    self?.error = error.localizedDescription
-                    return
-                }
-                
-                guard let data = data else {
-                    self?.error = "No data received"
-                    return
-                }
-                
-                do {
-                    let response = try JSONDecoder().decode(AccountDetailAPIResponse.self, from: data)
-                    
-                    self?.totalAmount = String(format: "€%.2f", response.currentBalance)
-                    
-                    let limitedTransactions = response.transactions.prefix(3)
-                    self?.recentTransactions = limitedTransactions.map { Transaction.from(apiTransaction: $0) }
-                    
-                } catch {
-                    self?.error = "Invalid response"
-                }
+        Task {
+            do {
+                let response = try await APIService.shared.getAccountDetails()
+                self.totalAmount = String(format: "€%.2f", response.currentBalance)
+                let limitedTransactions = response.transactions.prefix(3)
+                self.recentTransactions = limitedTransactions.map { Transaction.from(apiTransaction: $0) }
+            } catch {
+                self.error = error.localizedDescription
             }
-        }.resume()
+            self.isLoading = false
+        }
     }
 }

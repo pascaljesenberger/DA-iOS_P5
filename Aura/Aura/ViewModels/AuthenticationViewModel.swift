@@ -15,7 +15,6 @@ class AuthenticationViewModel: ObservableObject {
     @Published var error: String? = nil
     
     private var token: String?
-    
     let onLoginSucceed: (() -> ())
     
     init(_ callback: @escaping () -> ()) {
@@ -32,6 +31,7 @@ class AuthenticationViewModel: ObservableObject {
         isEmailValid = isValidEmail(username)
     }
     
+    @MainActor
     func login() {
         validateEmail()
         guard isEmailValid else { return }
@@ -39,38 +39,16 @@ class AuthenticationViewModel: ObservableObject {
         isLoading = true
         error = nil
         
-        guard let url = URL(string: "http://127.0.0.1:8080/auth") else { return }
-        
-        let body = ["username": username, "password": password]
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try? JSONEncoder().encode(body)
-        
-        URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
-            DispatchQueue.main.async {
-                self?.isLoading = false
-                
-                if let error = error {
-                    self?.error = error.localizedDescription
-                    return
-                }
-                
-                guard let data = data else {
-                    self?.error = "No data received"
-                    return
-                }
-                
-                do {
-                    let response = try JSONDecoder().decode(AuthResponse.self, from: data)
-                    self?.token = response.token
-                    UserDefaults.standard.set(response.token, forKey: "authToken")
-                    self?.onLoginSucceed()
-                } catch {
-                    self?.error = "Invalid response"
-                }
+        Task {
+            do {
+                let response = try await APIService.shared.authenticate(username: username, password: password)
+                self.token = response.token
+                UserDefaults.standard.set(response.token, forKey: "authToken")
+                self.onLoginSucceed()
+            } catch {
+                self.error = error.localizedDescription
             }
-        }.resume()
+            self.isLoading = false
+        }
     }
 }
