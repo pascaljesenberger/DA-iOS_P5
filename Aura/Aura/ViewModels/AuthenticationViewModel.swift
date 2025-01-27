@@ -74,7 +74,3 @@ class AuthenticationViewModel: ObservableObject {
         }.resume()
     }
 }
-
-struct AuthResponse: Codable {
-    let token: String
-}

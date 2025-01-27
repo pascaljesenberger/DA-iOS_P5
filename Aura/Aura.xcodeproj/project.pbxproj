@@ -13,6 +13,10 @@
 		50E8B27D2D45F0850070204F /* AuthenticationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E8B27C2D45F0850070204F /* AuthenticationResponse.swift */; };
 		50E8B27F2D45F0A90070204F /* AccountDetailModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E8B27E2D45F0A90070204F /* AccountDetailModels.swift */; };
 		50E8B2812D45F0B40070204F /* AllTransactionsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E8B2802D45F0B40070204F /* AllTransactionsModels.swift */; };
+		50E8B2BB2D4773610070204F /* AuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E8B2BA2D4773610070204F /* AuthenticationTests.swift */; };
+		50E8B2BD2D47738A0070204F /* MoneyTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E8B2BC2D47738A0070204F /* MoneyTransferTests.swift */; };
+		50E8B2BF2D4773A70070204F /* AccountDetailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E8B2BE2D4773A70070204F /* AccountDetailTests.swift */; };
+		50E8B2C12D4773D80070204F /* NetworkErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E8B2C02D4773D80070204F /* NetworkErrorTests.swift */; };
 		53D4187C2AC7099A0070ADB1 /* AuraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4187B2AC7099A0070ADB1 /* AuraApp.swift */; };
 		53D418802AC7099B0070ADB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53D4187F2AC7099B0070ADB1 /* Assets.xcassets */; };
 		53D418832AC7099B0070ADB1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53D418822AC7099B0070ADB1 /* Preview Assets.xcassets */; };
@@ -41,11 +45,15 @@
 		5072324A2D4061AD0046ED8A /* AllTransactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTransactionsView.swift; sourceTree = "<group>"; };
 		5072324C2D4065590046ED8A /* TransactionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRow.swift; sourceTree = "<group>"; };
 		5072324E2D40658D0046ED8A /* AllTransactionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTransactionsViewModel.swift; sourceTree = "<group>"; };
-		50BF78F12D418C7F0046D931 /* AuraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		50E8B27C2D45F0850070204F /* AuthenticationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthenticationResponse.swift; path = Aura/ViewModels/AuthenticationResponse.swift; sourceTree = "<group>"; };
+		50E8B27C2D45F0850070204F /* AuthenticationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthenticationResponse.swift; path = ../ViewModels/AuthenticationResponse.swift; sourceTree = "<group>"; };
 		50E8B27E2D45F0A90070204F /* AccountDetailModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountDetailModels.swift; path = Aura/AccountDetailModels.swift; sourceTree = SOURCE_ROOT; };
 		50E8B2802D45F0B40070204F /* AllTransactionsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AllTransactionsModels.swift; path = Aura/AllTransactionsModels.swift; sourceTree = SOURCE_ROOT; };
-		53D418782AC7099A0070ADB1 /* Aura.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aura.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		50E8B2A02D460DBC0070204F /* Aura.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aura.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		50E8B2A12D460DBC0070204F /* AuraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		50E8B2BA2D4773610070204F /* AuthenticationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationTests.swift; sourceTree = "<group>"; };
+		50E8B2BC2D47738A0070204F /* MoneyTransferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTransferTests.swift; sourceTree = "<group>"; };
+		50E8B2BE2D4773A70070204F /* AccountDetailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailTests.swift; sourceTree = "<group>"; };
+		50E8B2C02D4773D80070204F /* NetworkErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorTests.swift; sourceTree = "<group>"; };
 		53D4187B2AC7099A0070ADB1 /* AuraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuraApp.swift; sourceTree = "<group>"; };
 		53D4187F2AC7099B0070ADB1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		53D418822AC7099B0070ADB1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -78,13 +86,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		50BF78EC2D418BF30046D931 /* AuraTests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AuraTests;
-			sourceTree = "<group>";
-		};
 		50E8B2792D45F04D0070204F /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -93,34 +94,48 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		50E8B2822D4606840070204F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				50E8B27C2D45F0850070204F /* AuthenticationResponse.swift */,
+				50E8B27E2D45F0A90070204F /* AccountDetailModels.swift */,
+				50E8B2802D45F0B40070204F /* AllTransactionsModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		50E8B29F2D460D1E0070204F /* AuraTests */ = {
+			isa = PBXGroup;
+			children = (
+				50E8B2BA2D4773610070204F /* AuthenticationTests.swift */,
+				50E8B2BC2D47738A0070204F /* MoneyTransferTests.swift */,
+				50E8B2BE2D4773A70070204F /* AccountDetailTests.swift */,
+				50E8B2C02D4773D80070204F /* NetworkErrorTests.swift */,
+			);
+			path = AuraTests;
+			sourceTree = "<group>";
+		};
 		53D4186F2AC7099A0070ADB1 = {
 			isa = PBXGroup;
 			children = (
 				53D4187A2AC7099A0070ADB1 /* Aura */,
-				53D418792AC7099A0070ADB1 /* Products */,
+				50E8B2A02D460DBC0070204F /* Aura.app */,
+				50E8B2A12D460DBC0070204F /* AuraTests.xctest */,
 			);
-			sourceTree = "<group>";
-		};
-		53D418792AC7099A0070ADB1 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				53D418782AC7099A0070ADB1 /* Aura.app */,
-				50BF78F12D418C7F0046D931 /* AuraTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		53D4187A2AC7099A0070ADB1 /* Aura */ = {
 			isa = PBXGroup;
 			children = (
 				53D418962AC70FC50070ADB1 /* Utils */,
-				53D4188B2AC709B80070ADB1 /* Models */,
 				53D4188A2AC709B30070ADB1 /* ViewModels */,
 				53D418892AC709AD0070ADB1 /* Views */,
 				53D4187B2AC7099A0070ADB1 /* AuraApp.swift */,
 				53D4187F2AC7099B0070ADB1 /* Assets.xcassets */,
 				53D418812AC7099B0070ADB1 /* Preview Content */,
 				50E8B2792D45F04D0070204F /* Components */,
+				50E8B2822D4606840070204F /* Models */,
+				50E8B29F2D460D1E0070204F /* AuraTests */,
 			);
 			path = Aura;
 			sourceTree = "<group>";
@@ -140,7 +155,6 @@
 				53D418922AC70AB10070ADB1 /* AccountDetailView.swift */,
 				5072324A2D4061AD0046ED8A /* AllTransactionsView.swift */,
 				53D418942AC70ABF0070ADB1 /* MoneyTransferView.swift */,
-				50BF78EC2D418BF30046D931 /* AuraTests */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -155,16 +169,6 @@
 				5072324E2D40658D0046ED8A /* AllTransactionsViewModel.swift */,
 			);
 			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		53D4188B2AC709B80070ADB1 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				50E8B27C2D45F0850070204F /* AuthenticationResponse.swift */,
-				50E8B27E2D45F0A90070204F /* AccountDetailModels.swift */,
-				50E8B2802D45F0B40070204F /* AllTransactionsModels.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		53D418962AC70FC50070ADB1 /* Utils */ = {
@@ -196,7 +200,7 @@
 			packageProductDependencies = (
 			);
 			productName = AuraTests;
-			productReference = 50BF78F12D418C7F0046D931 /* AuraTests.xctest */;
+			productReference = 50E8B2A12D460DBC0070204F /* AuraTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		53D418772AC7099A0070ADB1 /* Aura */ = {
@@ -213,7 +217,7 @@
 			);
 			name = Aura;
 			productName = Aura;
-			productReference = 53D418782AC7099A0070ADB1 /* Aura.app */;
+			productReference = 50E8B2A02D460DBC0070204F /* Aura.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -228,6 +232,7 @@
 				TargetAttributes = {
 					50BF78F02D418C7F0046D931 = {
 						CreatedOnToolsVersion = 16.2;
+						LastSwiftMigration = 1620;
 						TestTargetID = 53D418772AC7099A0070ADB1;
 					};
 					53D418772AC7099A0070ADB1 = {
@@ -244,7 +249,7 @@
 				Base,
 			);
 			mainGroup = 53D4186F2AC7099A0070ADB1;
-			productRefGroup = 53D418792AC7099A0070ADB1 /* Products */;
+			productRefGroup = 53D4186F2AC7099A0070ADB1;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -278,6 +283,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50E8B2BB2D4773610070204F /* AuthenticationTests.swift in Sources */,
+				50E8B2BD2D47738A0070204F /* MoneyTransferTests.swift in Sources */,
+				50E8B2C12D4773D80070204F /* NetworkErrorTests.swift in Sources */,
+				50E8B2BF2D4773A70070204F /* AccountDetailTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +328,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -327,7 +337,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.pascaljesenberger.AuraTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = Yes;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Aura.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Aura";
 			};
@@ -337,6 +349,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -346,6 +359,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = Yes;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Aura.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Aura";
 			};
@@ -411,6 +425,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = Yes;
 			};
 			name = Debug;
 		};
@@ -466,6 +481,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = Yes;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -494,6 +510,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = Yes;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -522,6 +539,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = Yes;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
