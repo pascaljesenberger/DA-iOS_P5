@@ -43,7 +43,7 @@ class AuthenticationViewModel: ObservableObject {
             do {
                 let response = try await APIService.shared.authenticate(username: username, password: password)
                 self.token = response.token
-                UserDefaults.standard.set(response.token, forKey: "authToken")
+                UserDefaults.standard.set(response.token, forKey: "authToken") // garde le token dans UserDefaults
                 self.onLoginSucceed()
             } catch {
                 self.error = "Une erreur s'est produite. Veuillez réessayer plus tard."

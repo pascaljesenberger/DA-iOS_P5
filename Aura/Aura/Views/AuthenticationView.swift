@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct AuthenticationView: View {
-    @State private var username: String = ""
-    @State private var password: String = ""
     
     let gradientStart = Color(hex: "#94A684").opacity(0.7)
     let gradientEnd = Color(hex: "#94A684").opacity(0.0)

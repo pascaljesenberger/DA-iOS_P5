@@ -36,13 +36,21 @@ class AccountDetailViewModel: ObservableObject {
         Task {
             do {
                 let response = try await APIService.shared.getAccountDetails()
-                self.totalAmount = String(format: "€%.2f", response.currentBalance)
+                let formattedTotal = String(format: "€%.2f", response.currentBalance)
                 let limitedTransactions = response.transactions.prefix(3)
-                self.recentTransactions = limitedTransactions.map { Transaction.from(apiTransaction: $0) }
+                let mappedTransactions = limitedTransactions.map { Transaction.from(apiTransaction: $0) }
+                
+                await MainActor.run {
+                    self.totalAmount = formattedTotal
+                    self.recentTransactions = mappedTransactions
+                    self.isLoading = false
+                }
             } catch {
-                self.error = error.localizedDescription
+                await MainActor.run {
+                    self.error = error.localizedDescription
+                    self.isLoading = false
+                }
             }
-            self.isLoading = false
         }
     }
 }
