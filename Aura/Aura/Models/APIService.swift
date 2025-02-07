@@ -20,7 +20,9 @@ class APIService {
         request.httpBody = try JSONEncoder().encode(body)
         
         let (data, _) = try await URLSession.shared.data(for: request)
-        return try JSONDecoder().decode(AuthResponse.self, from: data)
+        let response = try JSONDecoder().decode(AuthResponse.self, from: data)
+        print("Authenticate response: \(response)")
+        return response
     }
     
     func getAccountDetails() async throws -> AccountDetailAPIResponse {
@@ -33,7 +35,9 @@ class APIService {
         request.setValue(token, forHTTPHeaderField: "token")
         
         let (data, _) = try await URLSession.shared.data(for: request)
-        return try JSONDecoder().decode(AccountDetailAPIResponse.self, from: data)
+        let response = try JSONDecoder().decode(AccountDetailAPIResponse.self, from: data)
+        print("Account details response: \(response)")
+        return response
     }
     
     func transferMoney(to recipient: String, amount: Double) async throws {
@@ -55,6 +59,7 @@ class APIService {
               httpResponse.statusCode == 200 else {
             throw APIError.transferFailed
         }
+        print("Transfer to \(recipient) of \(amount) was successful")
     }
     
     func getAllTransactions() async throws -> AllTransactionsAPIResponse {
@@ -67,7 +72,9 @@ class APIService {
         request.setValue(token, forHTTPHeaderField: "token")
         
         let (data, _) = try await URLSession.shared.data(for: request)
-        return try JSONDecoder().decode(AllTransactionsAPIResponse.self, from: data)
+        let response = try JSONDecoder().decode(AllTransactionsAPIResponse.self, from: data)
+        print("All transactions response: \(response)")
+        return response
     }
 }
 
