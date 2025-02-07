@@ -32,7 +32,7 @@ class NetworkErrorTests: XCTestCase {
         super.tearDown()
     }
     
-    func testAuthenticationNetworkError() {
+    @MainActor func testAuthenticationNetworkError() {
         let expectation = XCTestExpectation(description: "Network error in authentication")
         
         MockURLProtocol.requestHandler = { request in
@@ -70,7 +70,7 @@ class NetworkErrorTests: XCTestCase {
         wait(for: [expectation], timeout: 2.0)
     }
     
-    func testTransferNetworkServerError() {
+    @MainActor func testTransferNetworkServerError() {
         let expectation = XCTestExpectation(description: "Server error in transfer")
         
         MockURLProtocol.requestHandler = { request in
@@ -91,7 +91,7 @@ class NetworkErrorTests: XCTestCase {
         wait(for: [expectation], timeout: 2.0)
     }
     
-    func testInvalidJSONResponse() {
+     func testInvalidJSONResponse() {
         let expectation = XCTestExpectation(description: "Invalid JSON response")
         
         MockURLProtocol.requestHandler = { request in
@@ -102,7 +102,7 @@ class NetworkErrorTests: XCTestCase {
         
         accountViewModel.fetchAccountDetails()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+       DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             XCTAssertNotNil(self.accountViewModel.error)
             XCTAssertEqual(self.accountViewModel.error, "Invalid response")
             expectation.fulfill()

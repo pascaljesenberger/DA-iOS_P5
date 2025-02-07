@@ -46,7 +46,7 @@ class AuthenticationViewModel: ObservableObject {
                 UserDefaults.standard.set(response.token, forKey: "authToken")
                 self.onLoginSucceed()
             } catch {
-                self.error = error.localizedDescription
+                self.error = "Une erreur s'est produite. Veuillez réessayer plus tard."
             }
             self.isLoading = false
         }
